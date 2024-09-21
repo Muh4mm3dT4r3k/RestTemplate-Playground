@@ -2,6 +2,7 @@ package com.mohamed.resttemplate.client;
 
 import com.mohamed.resttemplate.dto.ObjectDTO;
 import com.mohamed.resttemplate.dto.RequestDTO;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,4 +33,10 @@ public class ClientController {
         return clientService
                 .getObject(1);
     }
+
+    @GetMapping("/retrieve/headers")
+    public ResponseEntity<HttpHeaders> retrieveHeaders() {
+        return ResponseEntity.ok(clientService.retrieveHttpHeaders());
+    }
+
 }
