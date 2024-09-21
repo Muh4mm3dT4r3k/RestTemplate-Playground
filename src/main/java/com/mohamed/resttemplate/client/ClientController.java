@@ -2,7 +2,6 @@ package com.mohamed.resttemplate.client;
 
 import com.mohamed.resttemplate.dto.ObjectDTO;
 import com.mohamed.resttemplate.dto.RequestDTO;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +39,15 @@ public class ClientController {
     @GetMapping("/retrieve/headers")
     public ResponseEntity<Boolean> retrieveHeaders() {
         return ResponseEntity.ok(Objects.requireNonNull(clientService.retrieveHttpHeaders().getContentType()).includes(MediaType.APPLICATION_JSON));
+    }
+
+    @GetMapping("/post")
+    public ResponseEntity<?> postObject() {
+        ResponseEntity<?> responseEntity = clientService.postObject();
+        return ResponseEntity
+                .status(responseEntity.getStatusCode())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(responseEntity.getBody());
     }
 
 }
