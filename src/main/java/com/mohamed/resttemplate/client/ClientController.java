@@ -3,10 +3,13 @@ package com.mohamed.resttemplate.client;
 import com.mohamed.resttemplate.dto.ObjectDTO;
 import com.mohamed.resttemplate.dto.RequestDTO;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/client")
@@ -35,8 +38,8 @@ public class ClientController {
     }
 
     @GetMapping("/retrieve/headers")
-    public ResponseEntity<HttpHeaders> retrieveHeaders() {
-        return ResponseEntity.ok(clientService.retrieveHttpHeaders());
+    public ResponseEntity<Boolean> retrieveHeaders() {
+        return ResponseEntity.ok(Objects.requireNonNull(clientService.retrieveHttpHeaders().getContentType()).includes(MediaType.APPLICATION_JSON));
     }
 
 }
